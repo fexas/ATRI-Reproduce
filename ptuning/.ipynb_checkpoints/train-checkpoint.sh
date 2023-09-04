@@ -1,19 +1,18 @@
 PRE_SEQ_LEN=32
 LR=2e-2
-source venv2/bin/activate && CUDA_VISIBLE_DEVICES=0 python3 main.py \
+CUDA_VISIBLE_DEVICES=0 sudo python3 main.py \
     --do_train \
     --train_file train.json \
-    --validation_file dev.json\
+    --validation_file dev.json \
     --preprocessing_num_workers 10 \
-    --prompt_column prompt \
-    --response_column response \
-    --history_column history \
+    --prompt_column content \
+    --response_column summary \
     --overwrite_cache \
     --model_name_or_path /mnt/workspace/ChatGLM2-6B/model/chatglm2-6b \
-    --output_dir ./output/adgen-chatglm2-6b-pt-$PRE_SEQ_LEN-$LR\
+    --output_dir output/adgen-chatglm2-6b-pt-$PRE_SEQ_LEN-$LR \
     --overwrite_output_dir \
-    --max_source_length 256 \
-    --max_target_length 256 \
+    --max_source_length 64 \
+    --max_target_length 128 \
     --per_device_train_batch_size 1 \
     --per_device_eval_batch_size 1 \
     --gradient_accumulation_steps 16 \

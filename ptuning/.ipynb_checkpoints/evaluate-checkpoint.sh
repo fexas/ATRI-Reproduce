@@ -1,15 +1,15 @@
 PRE_SEQ_LEN=32
 CHECKPOINT=adgen-chatglm-6b-pt-32-2e-2
 STEP=3000
-source venv2/bin/activate && CUDA_VISIBLE_DEVICES=0 sudo python3 main.py \
+CUDA_VISIBLE_DEVICES=0 sudo python3 main.py \
     --do_predict \
-    --validation_file dev.json \
-    --test_file dev.json \
+    --validation_file ./dev.json \
+    --test_file ./dev.json \
     --overwrite_cache \
     --prompt_column prompt \
     --response_column response \
     --model_name_or_path /mnt/workspace/ChatGLM2-6B/model/chatglm2-6b \
-    --ptuning_checkpoint ./output/adgen-chatglm2-6b-pt-$CHECKPOINT/checkpoint-$STEP \
+    --ptuning_checkpoint ./output/$CHECKPOINT/checkpoint-$STEP \
     --output_dir ./output/$CHECKPOINT \
     --overwrite_output_dir \
     --max_source_length 64 \
